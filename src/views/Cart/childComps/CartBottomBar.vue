@@ -5,7 +5,7 @@
       <span>全选</span>
     </div>
     <div class="total-price">合计:{{totalPrice}}</div>
-    <div class="go-settlement">去结算：({{totalCount}})</div>
+    <div class="go-settlement" @click="settlementClick">去结算：({{totalCount}})</div>
   </div>
 </template>
 
@@ -46,6 +46,11 @@
         }else{
           this.$store.state.cartList.forEach(item => item.checked = true)
         }
+      },
+      settlementClick() {
+        if(!this.isSelectAll) {
+          this.$toast.toastShow('请选中需结算商品')
+        }
       }
     }
   }
@@ -61,18 +66,18 @@
     padding: 10px;
   }
   .check-content {
-    width: 80px;
+    width: 60px;
     display: flex;
     align-items: center;
   }
   .check-button {
     width: 15px;
     height: 15px;
-    margin: 0 5px 0 12px;
+    margin-right: 5px;
     line-height: 15px;
   }
   .total-price {
-    margin:0 10px;
+    margin:0 10px 0 5px;
     flex: 1;
     font-size: 14px;
   }

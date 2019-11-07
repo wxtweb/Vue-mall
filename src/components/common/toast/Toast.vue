@@ -1,5 +1,5 @@
 <template>
-  <div class="toast" v-show="toastShow">
+  <div class="toast" v-show="isShow">
     <div>{{message}}</div>
   </div>
 </template>
@@ -7,7 +7,7 @@
 <script>
   export default {
     name: "Toast",
-    props: {
+    /*props: {
       message: {
         type: String,
         default: ''
@@ -17,6 +17,24 @@
         default: false
       }
 
+    }*/
+    data() {
+      return{
+        message: '',
+       isShow: false
+      }
+    },
+    methods: {
+      toastShow(message='默认文字', duration=1500) {
+        this.isShow = true;
+        this.message = message;
+        setTimeout(() => {
+          this.isShow = false;
+          this.message = ''
+        },duration)
+
+
+      }
     }
   }
 </script>
@@ -37,5 +55,6 @@
     -moz-border-radius: 10px;
     border-radius: 20px;
     background-color: rgba(230, 40, 40, .7);
+    z-index: 10;
   }
 </style>

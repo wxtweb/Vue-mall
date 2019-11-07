@@ -16,7 +16,7 @@
     </div>
     <div class="bar-item bar-right">
       <div class="cart" @click="addToCart">加入购物车</div>
-      <div class="buy">购买</div>
+      <div class="buy">立即购买</div>
     </div>
   </div>
 </template>
@@ -47,6 +47,7 @@
   .bar-item {
     flex: 1;
     display: flex;
+    width: 50px;
   }
   .bar-item > div {
     flex: 1;
@@ -68,15 +69,24 @@
     background-position: 0 -98px;
   }
   .bar-right {
+    display: flex;
+    width: 210px;
     font-size: 15px;
     color: #fff;
-    line-height: 49px;
+    line-height: 35px;
+    height: 35px;
+    font-size: 18px;
+    margin: auto 0;
   }
   .bar-right .cart {
-    background-color: #ffe817;
-    color: #333;
+    background-color:#e62828;
+    border-radius: 20px;
+    padding: 0 7px;
+    width: 200px;
   }
   .bar-right .buy {
-    background-color: #f69;
+    background-color: #ffa800;
+    border-radius: 20px;
+    margin: 0px 5px;
   }
 </style>

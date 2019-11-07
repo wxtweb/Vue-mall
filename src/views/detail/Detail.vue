@@ -19,7 +19,7 @@
     </scroll>
     <detail-bottom-bar @addCart="addToCart"/>
     <back-top @click.native="backTopClick" v-show="isShowBackTop"></back-top>
-    <toast :message="message" :toastShow="toastShow"/>
+<!--    <toast :message="message" :toastShow="toastShow"/>-->
   </div>
 
 </template>
@@ -40,7 +40,7 @@
   import {itemListenerMixin, BackTopMixin} from 'common/mixin'
 
   import Scroll from 'components/common/scroll/Scroll'
-  import Toast from 'components/common/toast/Toast'
+  // import Toast from 'components/common/toast/Toast'
   import {debounce} from "../../common/utils";
   import mapActions from 'vuex'
   // import {getDetial, Goods} from 'network/detail'
@@ -58,7 +58,7 @@
       DetailCommentInfo,
       DetailGoodsRec,
       DetailBottomBar,
-      Toast
+      // Toast
     },
     mixins: [itemListenerMixin, BackTopMixin],
     data() {
@@ -380,17 +380,21 @@
           product.id = this.id
 
           // this.$store.commit('addCart', product)
+
           this.$store.dispatch('addCart', product).then(res => {
-            this.toastShow =true;
+            /*this.toastShow =true;
             this.message = res;
             setTimeout(() => {
               this.toastShow = false;
               this.message = ''
             },1500)
-          })
+          })*/
           /*this.addCart(product).then(res => {
             console.log(res);
-          })*/
+          }*/
+            this.$toast.toastShow(res)
+          })
+
         }
     },
     created() {
