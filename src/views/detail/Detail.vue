@@ -19,6 +19,7 @@
     </scroll>
     <detail-bottom-bar @addCart="addToCart"/>
     <back-top @click.native="backTopClick" v-show="isShowBackTop"></back-top>
+    <toast :message="message" :toastShow="toastShow"/>
   </div>
 
 </template>
@@ -39,7 +40,9 @@
   import {itemListenerMixin, BackTopMixin} from 'common/mixin'
 
   import Scroll from 'components/common/scroll/Scroll'
+  import Toast from 'components/common/toast/Toast'
   import {debounce} from "../../common/utils";
+  import mapActions from 'vuex'
   // import {getDetial, Goods} from 'network/detail'
 
   export default {
@@ -55,7 +58,7 @@
       DetailCommentInfo,
       DetailGoodsRec,
       DetailBottomBar,
-
+      Toast
     },
     mixins: [itemListenerMixin, BackTopMixin],
     data() {
@@ -311,6 +314,8 @@
           }
         },
         currentIndex:0,
+        message: '',
+        toastShow: false,
         commentInfo:{
           user: {
             avata:require('assets/img/detail/detailComment/user/us-1.jpg'),
@@ -329,6 +334,7 @@
       }
     },
     methods: {
+      // ...mapActions(['addCart']),
       swiperImageLoad() {
         this.tabOffsetTop = this.$refs.goodsTab2.$el.offsetTop
         console.log(this.tabOffsetTop);
@@ -374,7 +380,17 @@
           product.id = this.id
 
           // this.$store.commit('addCart', product)
-          this.$store.dispatch('addCart', product)
+          this.$store.dispatch('addCart', product).then(res => {
+            this.toastShow =true;
+            this.message = res;
+            setTimeout(() => {
+              this.toastShow = false;
+              this.message = ''
+            },1500)
+          })
+          /*this.addCart(product).then(res => {
+            console.log(res);
+          })*/
         }
     },
     created() {
